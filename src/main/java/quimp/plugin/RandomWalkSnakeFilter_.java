@@ -58,8 +58,17 @@ public class RandomWalkSnakeFilter_ extends QWindowBuilder
     uiDefinition.put("beta", "spinner: 1: 10000: 1:" + Double.toString(params.beta));
     uiDefinition.put("iter", "spinner: 1: 100000: 1:" + Integer.toString(params.iter));
     uiDefinition.put("relim", "spinner: 1e-4: 10: 1:" + Double.toString(params.relim[0]));
-    uiDefinition.put("clean", "checkbox: Median: false: Apply 3x3 median ro result");
+    uiDefinition.put("clean", "checkbox: Median: false");
+    uiDefinition.put("localMean", "checkbox: Local Mean: false");
+    uiDefinition.put("LmWindow",
+            "spinner: 3: 101: 2:" + Integer.toString(params.localMeanMaskSize));
 
+    //!>
+    uiDefinition.put("help", "<font size=\"3\">"
+            + "<p><strong>Median</strong> - Apply 3x3 median filter to segmented image before "
+            + "converting it to Snake"
+            + "</p></font>");
+    //!<
     buildWindow(uiDefinition); // construct ui (not shown yet)
   }
 
@@ -96,7 +105,7 @@ public class RandomWalkSnakeFilter_ extends QWindowBuilder
   public void setPluginConfig(ParamList par) throws QuimpPluginException {
     try {
       setValues(par); // populate loaded values to UI
-      params = new RwFilterParams(par); // convert list of paras to RW compatibilie structure
+      params = new RwFilterParams(par); // convert list of params to RW compatible structure
     } catch (Exception e) {
       throw new QuimpPluginException("Wrong input argument-> " + e.getMessage(), e);
     }
@@ -168,6 +177,8 @@ public class RandomWalkSnakeFilter_ extends QWindowBuilder
     PropagateSeeds propagateSeeds = PropagateSeeds.getPropagator(Propagators.CONTOUR, true);
     // get new seeds using FG seed processed by propagator (shrink->new FG and expand->new BG)
     seeds = propagateSeeds.propagateSeed(seeds.get(Seeds.FOREGROUND), 10, 10);
+    // mask to local mean
+    seeds.put(Seeds.ROUGHMASK, mask.convertToByte(false));
 
     // new ImagePlus("", mask).show();
     // new ImagePlus("FG", seeds.get(Seeds.FOREGROUND)).show();

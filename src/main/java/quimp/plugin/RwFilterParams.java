@@ -24,7 +24,7 @@ class RwFilterParams extends RandomWalkParams {
     super(params.getDoubleValue("alpha"), params.getDoubleValue("beta"), null, null,
             params.getIntValue("iter"), null,
             new Double[] { params.getDoubleValue("relim"), params.getDoubleValue("relim") / 2 },
-            null, null);
+            params.getBooleanValue("localMean"), params.getIntValue("LmWindow"));
     if (params.getBooleanValue("clean") == true) {
       finalFilter = new BinaryFilters.MedianMorpho();
     }

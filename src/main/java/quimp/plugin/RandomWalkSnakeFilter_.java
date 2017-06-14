@@ -199,7 +199,7 @@ public class RandomWalkSnakeFilter_ extends QWindowBuilder
       propagateSeeds.getCompositeSeed(new ImagePlus("", dup), 0).show(); // and show seeds
     }
 
-    ImageProcessor ret = rws.run(seeds); // run segmentaiton
+    ImageProcessor ret = rws.run(seeds); // run segmentation
     // new ImagePlus("res", ret).show();
     TrackOutline track = new TrackOutline(ret, 0); // for converting BW mask to snake
     List<Outline> outline = track.getOutlines(TRACKING_STEP, false); // get outline
@@ -211,7 +211,7 @@ public class RandomWalkSnakeFilter_ extends QWindowBuilder
     if (data == null) {
       return;
     }
-    this.inputSnake = data; // FIXME make copy ?
+    this.inputSnake = data;
 
   }
 

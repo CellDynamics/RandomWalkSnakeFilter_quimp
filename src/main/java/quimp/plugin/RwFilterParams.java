@@ -13,6 +13,17 @@ import com.github.celldynamics.quimp.plugin.utils.QWindowBuilder;
  */
 class RwFilterParams extends RandomWalkParams {
 
+  int shrinkPower = 10;
+  int expandPower = 10;
+  boolean showSeeds = false;
+
+  /**
+   * Default values.
+   */
+  public RwFilterParams() {
+    super();
+  }
+
   /**
    * Copy selected parameters from {@link ParamList} to underlying {@link RandomWalkParams} class.
    * Parameters not included in list are set to theirs default values.
@@ -28,5 +39,8 @@ class RwFilterParams extends RandomWalkParams {
     if (params.getBooleanValue("clean") == true) {
       finalFilter = new BinaryFilters.MedianMorpho();
     }
+    shrinkPower = params.getIntValue("shrinkPower");
+    expandPower = (int) (shrinkPower * 1.5);
+    showSeeds = params.getBooleanValue("maskPreview");
   }
 }

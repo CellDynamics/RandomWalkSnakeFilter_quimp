@@ -52,7 +52,7 @@ public class RandomWalkSnakeFilter_ extends QWindowBuilder
     // configure window, names of UI elements are also names of variables
     // exported/imported by set/getPluginConfig
     params = new RwFilterParams();
-    uiDefinition.put("name", "RandomWalkSnakeFilter"); // name of win
+    uiDefinition.put("name", "RandomWalkSnakeFilter (Beta)"); // name of win
     uiDefinition.put("alpha", "spinner: 1: 10000: 1:" + Double.toString(params.alpha));
     uiDefinition.put("beta", "spinner: 1: 10000: 1:" + Double.toString(params.beta));
     uiDefinition.put("iter", "spinner: 1: 100000: 1:" + Integer.toString(params.iter));
@@ -164,7 +164,7 @@ public class RandomWalkSnakeFilter_ extends QWindowBuilder
    */
   @Override
   public String about() {
-    return "Random Walk segmentation filter\nAuthor: Piotr Baniukiewicz\n"
+    return "Random Walk segmentation filter (beta)\nAuthor: Piotr Baniukiewicz\n"
             + "mail: p.baniukiewicz@warwick.ac.uk";
   }
 

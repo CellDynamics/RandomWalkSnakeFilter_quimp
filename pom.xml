@@ -4,14 +4,14 @@
     <groupId>com.github.celldynamics</groupId>
     <artifactId>pom-quimp-plugin</artifactId>
     <version>17.06.02</version>
-    <relativePath/>
+    <relativePath />
     <!-- http://stackoverflow.com/questions/6003831/parent-relativepath-points-at-my-com-mycompanymyproject-instead-of-org-apache -->
   </parent>
   <!-- Project's coordinates -->
   <groupId>com.github.celldynamics.quimp.boaplugin</groupId>
   <artifactId>RandomWalkSnakeFilter-quimp</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0</version>
   <!-- Name and licencing and other project informations -->
   <name>RandomWalkSnakeFilter-quimp</name>
   <url>www.warwick.ac.uk/quimp</url>
@@ -38,7 +38,7 @@
     <connection>scm:git:https://github.com/CellDynamics/RandomWalkSnakeFilter_quimp.git</connection>
     <developerConnection>scm:git:https://github.com/CellDynamics/RandomWalkSnakeFilter_quimp.git</developerConnection>
     <url>https://github.com/CellDynamics/RandomWalkSnakeFilter_quimp</url>
-    <tag>HEAD</tag>
+    <tag>v1.0.0</tag>
   </scm>
   <issueManagement>
     <system>GitHub</system>

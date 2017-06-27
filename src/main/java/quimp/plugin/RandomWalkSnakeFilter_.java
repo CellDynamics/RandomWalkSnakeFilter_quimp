@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Map;
 
+import com.github.celldynamics.quimp.Constrictor;
 import com.github.celldynamics.quimp.Outline;
 import com.github.celldynamics.quimp.PropertyReader;
 import com.github.celldynamics.quimp.Snake;
@@ -194,7 +195,7 @@ public class RandomWalkSnakeFilter_ extends QWindowBuilder
     // new ImagePlus("FG", seeds.get(Seeds.FOREGROUND)).show();
     // new ImagePlus("BG", seeds.get(Seeds.BACKGROUND)).show();
     if (params.showSeeds) {
-      ImageProcessor dup = ip.duplicate(); // for sed visualisation
+      ImageProcessor dup = ip.duplicate(); // for seed visualisation
       dup.setLut(IJTools.getGrayLut()); // convert to gray
       propagateSeeds.getCompositeSeed(new ImagePlus("", dup), 0).show(); // and show seeds
     }
@@ -203,7 +204,10 @@ public class RandomWalkSnakeFilter_ extends QWindowBuilder
     // new ImagePlus("res", ret).show();
     TrackOutline track = new TrackOutline(ret, 0); // for converting BW mask to snake
     List<Outline> outline = track.getOutlines(TRACKING_STEP, false); // get outline
-    return new QuimpDataConverter(outline.get(0)).getSnake(inputSnake.getSnakeID()); // to Snake
+    Snake snake = new QuimpDataConverter(outline.get(0)).getSnake(inputSnake.getSnakeID()); // Snake
+    // recompute some internal parameters of snake
+    new Constrictor().constrict(snake, ip);
+    return snake;
   }
 
   @Override

@@ -16,6 +16,7 @@ class RwFilterParams extends RandomWalkParams {
   int shrinkPower = 10;
   int expandPower = 10;
   boolean showSeeds = false;
+  String maskLimit = "AC";
 
   /**
    * Default values.
@@ -42,5 +43,6 @@ class RwFilterParams extends RandomWalkParams {
     shrinkPower = params.getIntValue("shrinkPower");
     expandPower = (int) (shrinkPower * 1.5);
     showSeeds = params.getBooleanValue("maskPreview");
+    maskLimit = params.getStringValue("maskLimits");
   }
 }

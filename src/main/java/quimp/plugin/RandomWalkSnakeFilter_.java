@@ -27,6 +27,8 @@ import com.github.celldynamics.quimp.utils.IJTools;
 
 import ij.ImagePlus;
 import ij.gui.Roi;
+import ij.plugin.ImageCalculator;
+import ij.process.BinaryProcessor;
 import ij.process.ByteProcessor;
 import ij.process.ImageProcessor;
 
@@ -62,6 +64,7 @@ public class RandomWalkSnakeFilter_ extends QWindowBuilder
     uiDefinition.put("localMean", "checkbox: Local Mean: false");
     uiDefinition.put("LmWindow",
             "spinner: 3: 101: 2:" + Integer.toString(params.localMeanMaskSize));
+    uiDefinition.put("maskLimits", "choice: AC: NONE:");
     uiDefinition.put("clean", "checkbox: Median: false");
     uiDefinition.put("maskPreview", "checkbox: Mask Preview: false");
 
@@ -76,6 +79,7 @@ public class RandomWalkSnakeFilter_ extends QWindowBuilder
             + "converting it to Snake"
             + "<p><strong>Local Mean</strong> - enable local mean feature that improves behavior of the algorithm in areas with high gradient of intensity "
             + "<p><strong>LmWindow</strong> - local mean mask size (odd)"
+            + "<p><strong>maskLimits</strong> - if <i>NONE</i> is selected output mask can grow to any size. Option <i>AC</i> prevent output mask from be bigger than Active Contour result"
             + "<p><strong>Mask Preview</strong> - display initial seeds for segmentation generated from Snake"
             + "</p></font>");
     //!<
@@ -201,7 +205,14 @@ public class RandomWalkSnakeFilter_ extends QWindowBuilder
     }
 
     ImageProcessor ret = rws.run(seeds); // run segmentation
-    // new ImagePlus("res", ret).show();
+    // optionally cut result to original mask
+    if (params.maskLimit.equals("AC")) {
+      ImageCalculator ic = new ImageCalculator();
+      ImagePlus retc = ic.run("and create",
+              new ImagePlus("", new BinaryProcessor((ByteProcessor) mask.convertToByte(true))),
+              new ImagePlus("", new BinaryProcessor((ByteProcessor) ret)));
+      ret = retc.getProcessor();
+    }
     TrackOutline track = new TrackOutline(ret, 0); // for converting BW mask to snake
     List<Outline> outline = track.getOutlines(TRACKING_STEP, false); // get outline
     Snake snake = new QuimpDataConverter(outline.get(0)).getSnake(inputSnake.getSnakeID()); // Snake

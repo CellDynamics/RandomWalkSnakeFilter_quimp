@@ -49,6 +49,7 @@ public class RandomWalkSnakeFilter_Test {
     p.put("lmwindow", "9.0");
     p.put("clean", "true");
     p.put("maskpreview", "true");
+    p.put("maskLimits", "NONE");
     obj = new RandomWalkSnakeFilter_();
 
   }

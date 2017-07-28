@@ -1,5 +1,16 @@
 # Change Log
 
+## [v1.0.1](https://github.com/CellDynamics/RandomWalkSnakeFilter_quimp/tree/v1.0.1) (2017-07-28)
+[Full Changelog](https://github.com/CellDynamics/RandomWalkSnakeFilter_quimp/compare/v1.0.0...v1.0.1)
+
+**Fixed bugs:**
+
+- Poor results if initial segmentation in fine [\#5](https://github.com/CellDynamics/RandomWalkSnakeFilter_quimp/issues/5)
+
+**Closed issues:**
+
+- Update Snake fields after segmentation [\#3](https://github.com/CellDynamics/RandomWalkSnakeFilter_quimp/issues/3)
+
 ## [v1.0.0](https://github.com/CellDynamics/RandomWalkSnakeFilter_quimp/tree/v1.0.0) (2017-06-16)
 **Implemented enhancements:**
 

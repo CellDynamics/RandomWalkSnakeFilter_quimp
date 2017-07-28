@@ -11,7 +11,7 @@
   <groupId>com.github.celldynamics.quimp.boaplugin</groupId>
   <artifactId>RandomWalkSnakeFilter-quimp</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.0.1</version>
   <!-- Name and licencing and other project informations -->
   <name>RandomWalkSnakeFilter-quimp</name>
   <url>www.warwick.ac.uk/quimp</url>
@@ -38,7 +38,7 @@
     <connection>scm:git:https://github.com/CellDynamics/RandomWalkSnakeFilter_quimp.git</connection>
     <developerConnection>scm:git:https://github.com/CellDynamics/RandomWalkSnakeFilter_quimp.git</developerConnection>
     <url>https://github.com/CellDynamics/RandomWalkSnakeFilter_quimp</url>
-    <tag>HEAD</tag>
+    <tag>v1.0.1</tag>
   </scm>
   <issueManagement>
     <system>GitHub</system>

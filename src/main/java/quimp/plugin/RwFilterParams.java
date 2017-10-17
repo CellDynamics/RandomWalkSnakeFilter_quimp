@@ -16,7 +16,6 @@ class RwFilterParams extends RandomWalkParams {
   int shrinkPower = 10;
   int expandPower = 10;
   boolean showSeeds = false;
-  String maskLimit = "AC";
 
   /**
    * Default values.
@@ -40,9 +39,11 @@ class RwFilterParams extends RandomWalkParams {
     if (params.getBooleanValue("clean") == true) {
       finalFilter = new BinaryFilters.MedianMorpho();
     }
+    if (params.getStringValue("maskLimits").equals("AC")) {
+      super.maskLimit = true;
+    }
     shrinkPower = params.getIntValue("shrinkPower");
     expandPower = (int) (shrinkPower * 1.5);
     showSeeds = params.getBooleanValue("maskPreview");
-    maskLimit = params.getStringValue("maskLimits");
   }
 }

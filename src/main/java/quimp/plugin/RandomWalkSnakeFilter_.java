@@ -27,8 +27,6 @@ import com.github.celldynamics.quimp.utils.IJTools;
 
 import ij.ImagePlus;
 import ij.gui.Roi;
-import ij.plugin.ImageCalculator;
-import ij.process.BinaryProcessor;
 import ij.process.ByteProcessor;
 import ij.process.ImageProcessor;
 
@@ -205,14 +203,6 @@ public class RandomWalkSnakeFilter_ extends QWindowBuilder
     }
 
     ImageProcessor ret = rws.run(seeds); // run segmentation
-    // optionally cut result to original mask
-    if (params.maskLimit.equals("AC")) {
-      ImageCalculator ic = new ImageCalculator();
-      ImagePlus retc = ic.run("and create",
-              new ImagePlus("", new BinaryProcessor((ByteProcessor) mask.convertToByte(true))),
-              new ImagePlus("", new BinaryProcessor((ByteProcessor) ret)));
-      ret = retc.getProcessor();
-    }
     TrackOutline track = new TrackOutline(ret, 0); // for converting BW mask to snake
     List<Outline> outline = track.getOutlines(TRACKING_STEP, false); // get outline
     Snake snake = new QuimpDataConverter(outline.get(0)).getSnake(inputSnake.getSnakeID()); // Snake

@@ -6,9 +6,11 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Map;
 
+import com.github.celldynamics.quimp.BoaException;
 import com.github.celldynamics.quimp.Constrictor;
 import com.github.celldynamics.quimp.Outline;
 import com.github.celldynamics.quimp.PropertyReader;
+import com.github.celldynamics.quimp.QuimpException.MessageSinkTypes;
 import com.github.celldynamics.quimp.Snake;
 import com.github.celldynamics.quimp.ViewUpdater;
 import com.github.celldynamics.quimp.geom.TrackOutline;
@@ -205,9 +207,17 @@ public class RandomWalkSnakeFilter_ extends QWindowBuilder
     ImageProcessor ret = rws.run(seeds); // run segmentation
     TrackOutline track = new TrackOutline(ret, 0); // for converting BW mask to snake
     List<Outline> outline = track.getOutlines(TRACKING_STEP, false); // get outline
-    Snake snake = new QuimpDataConverter(outline.get(0)).getSnake(inputSnake.getSnakeID()); // Snake
-    // recompute some internal parameters of snake
-    new Constrictor().constrict(snake, ip);
+    Snake snake;
+    try {
+      snake = new QuimpDataConverter(outline.get(0)).getSnake(inputSnake.getSnakeID());
+      // recompute some internal parameters of snake
+      new Constrictor().constrict(snake, ip);
+    } catch (BoaException e) {
+      e.setMessageSinkType(MessageSinkTypes.IJERROR);
+      e.handleException(null, "Obtained outline was defective, returning input instead.");
+      snake = new Snake(inputSnake);
+    } // Snake
+
     return snake;
   }
 

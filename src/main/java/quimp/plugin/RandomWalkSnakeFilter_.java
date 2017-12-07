@@ -188,9 +188,9 @@ public class RandomWalkSnakeFilter_ extends QWindowBuilder
     Map<Seeds, ImageProcessor> seeds =
             RandomWalkSegmentation.decodeSeeds(mask, Color.WHITE, Color.BLACK);
     // use contour propagator for shrinking
-    PropagateSeeds propagateSeeds = PropagateSeeds.getPropagator(Propagators.CONTOUR, true);
+    PropagateSeeds propagateSeeds = PropagateSeeds.getPropagator(Propagators.CONTOUR, true, null);
     // get new seeds using FG seed processed by propagator (shrink->new FG and expand->new BG)
-    seeds = propagateSeeds.propagateSeed(seeds.get(Seeds.FOREGROUND), params.shrinkPower,
+    seeds = propagateSeeds.propagateSeed(seeds.get(Seeds.FOREGROUND), ip, params.shrinkPower,
             params.expandPower);
     // mask to local mean
     seeds.put(Seeds.ROUGHMASK, mask.convertToByte(false));

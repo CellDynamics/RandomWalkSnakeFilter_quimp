@@ -45,6 +45,7 @@ public class RandomWalkSnakeFilter_Test {
     p.put("iter", "100.0");
     p.put("relim", "0.008");
     p.put("shrinkpower", "2.0");
+    p.put("expandpower", "4.0");
     p.put("localmean", "true");
     p.put("lmwindow", "9.0");
     p.put("clean", "true");

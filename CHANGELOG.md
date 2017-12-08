@@ -1,5 +1,8 @@
 # Change Log
 
+## [v1.0.3](https://github.com/CellDynamics/RandomWalkSnakeFilter_quimp/tree/v1.0.3) (2017-12-08)
+[Full Changelog](https://github.com/CellDynamics/RandomWalkSnakeFilter_quimp/compare/v1.0.2...v1.0.3)
+
 ## [v1.0.2](https://github.com/CellDynamics/RandomWalkSnakeFilter_quimp/tree/v1.0.2) (2017-10-21)
 [Full Changelog](https://github.com/CellDynamics/RandomWalkSnakeFilter_quimp/compare/v1.0.1...v1.0.2)
 

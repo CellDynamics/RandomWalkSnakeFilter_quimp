@@ -34,7 +34,7 @@ class RwFilterParams extends RandomWalkParams {
   public RwFilterParams(ParamList params) {
     super(params.getDoubleValue("alpha"), params.getDoubleValue("beta"), null, null,
             params.getIntValue("iter"), null,
-            new Double[] { params.getDoubleValue("relim"), params.getDoubleValue("relim") / 2 },
+            new Double[] { params.getDoubleValue("relim"), params.getDoubleValue("relim") * 10 },
             params.getBooleanValue("localMean"), params.getIntValue("LmWindow"));
     if (params.getBooleanValue("clean") == true) {
       finalFilter = new BinaryFilters.MedianMorpho();
@@ -43,7 +43,7 @@ class RwFilterParams extends RandomWalkParams {
       super.maskLimit = true;
     }
     shrinkPower = params.getIntValue("shrinkPower");
-    expandPower = (int) (shrinkPower * 1.5);
+    expandPower = params.getIntValue("expandPower");
     showSeeds = params.getBooleanValue("maskPreview");
   }
 }

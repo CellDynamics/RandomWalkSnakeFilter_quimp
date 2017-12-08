@@ -61,6 +61,7 @@ public class RandomWalkSnakeFilter_ extends QWindowBuilder
     uiDefinition.put("iter", "spinner: 1: 100000: 1:" + Integer.toString(params.iter));
     uiDefinition.put("relim", "spinner: 1e-4: 10: 1:" + Double.toString(params.relim[0]));
     uiDefinition.put("shrinkPower", "spinner: 1: 100: 1:" + Double.toString(params.shrinkPower));
+    uiDefinition.put("expandPower", "spinner: 1: 100: 1:" + Double.toString(params.expandPower));
     uiDefinition.put("localMean", "checkbox: Local Mean: false");
     uiDefinition.put("LmWindow",
             "spinner: 3: 101: 2:" + Integer.toString(params.localMeanMaskSize));

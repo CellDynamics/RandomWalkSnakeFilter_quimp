@@ -59,7 +59,8 @@ public class RandomWalkSnakeFilter_ extends QWindowBuilder
     uiDefinition.put("alpha", "spinner: 1: 10000: 1:" + Double.toString(params.alpha));
     uiDefinition.put("beta", "spinner: 1: 10000: 1:" + Double.toString(params.beta));
     uiDefinition.put("iter", "spinner: 1: 100000: 1:" + Integer.toString(params.iter));
-    uiDefinition.put("relim", "spinner: 1e-4: 10: 1:" + Double.toString(params.relim[0]));
+    uiDefinition.put("relim",
+            "spinnerd: 1e-4: 10: 1e-5:" + Double.toString(params.relim[0]) + ":6");
     uiDefinition.put("shrinkPower", "spinner: 1: 100: 1:" + Double.toString(params.shrinkPower));
     uiDefinition.put("expandPower", "spinner: 1: 100: 1:" + Double.toString(params.expandPower));
     uiDefinition.put("localMean", "checkbox: Local Mean: false");
@@ -248,6 +249,7 @@ public class RandomWalkSnakeFilter_ extends QWindowBuilder
         Object b = e.getSource();
         if (b == applyB) { // pressed apply, copy ui inputSnake to plugin
           qcontext.updateView();
+
         }
 
       }

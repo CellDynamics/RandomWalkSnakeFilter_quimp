@@ -14,7 +14,7 @@ import com.github.celldynamics.quimp.plugin.utils.QWindowBuilder;
 class RwFilterParams extends RandomWalkParams {
 
   int shrinkPower = 10;
-  int expandPower = 10;
+  int expandPower = 15;
   boolean showSeeds = false;
 
   /**

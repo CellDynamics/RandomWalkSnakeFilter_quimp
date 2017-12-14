@@ -2,16 +2,16 @@ package quimp.plugin;
 
 import com.github.celldynamics.quimp.plugin.ParamList;
 import com.github.celldynamics.quimp.plugin.randomwalk.BinaryFilters;
-import com.github.celldynamics.quimp.plugin.randomwalk.RandomWalkParams;
+import com.github.celldynamics.quimp.plugin.randomwalk.RandomWalkOptions;
 import com.github.celldynamics.quimp.plugin.utils.QWindowBuilder;
 
 /**
- * Simplifies transferring options between {@link ParamList} and {@link RandomWalkParams}
+ * Simplifies transferring options between {@link ParamList} and {@link RandomWalkOptions}
  * 
  * @author p.baniukiewicz
  *
  */
-class RwFilterParams extends RandomWalkParams {
+class RwFilterParams extends RandomWalkOptions {
 
   int shrinkPower = 10;
   int expandPower = 15;
@@ -25,7 +25,7 @@ class RwFilterParams extends RandomWalkParams {
   }
 
   /**
-   * Copy selected parameters from {@link ParamList} to underlying {@link RandomWalkParams} class.
+   * Copy selected parameters from {@link ParamList} to underlying {@link RandomWalkOptions} class.
    * Parameters not included in list are set to theirs default values.
    * 
    * @param params List of parameters obtained from GUI

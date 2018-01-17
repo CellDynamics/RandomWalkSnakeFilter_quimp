@@ -3,8 +3,8 @@ package quimp.plugin;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import com.github.celldynamics.quimp.BoaException;
 import com.github.celldynamics.quimp.Constrictor;
@@ -21,7 +21,9 @@ import com.github.celldynamics.quimp.plugin.QuimpPluginException;
 import com.github.celldynamics.quimp.plugin.randomwalk.PropagateSeeds;
 import com.github.celldynamics.quimp.plugin.randomwalk.PropagateSeeds.Propagators;
 import com.github.celldynamics.quimp.plugin.randomwalk.RandomWalkSegmentation;
-import com.github.celldynamics.quimp.plugin.randomwalk.RandomWalkSegmentation.Seeds;
+import com.github.celldynamics.quimp.plugin.randomwalk.RandomWalkSegmentation.SeedTypes;
+import com.github.celldynamics.quimp.plugin.randomwalk.SeedProcessor;
+import com.github.celldynamics.quimp.plugin.randomwalk.Seeds;
 import com.github.celldynamics.quimp.plugin.snakes.IQuimpBOASnakeFilter;
 import com.github.celldynamics.quimp.plugin.utils.QWindowBuilder;
 import com.github.celldynamics.quimp.plugin.utils.QuimpDataConverter;
@@ -187,15 +189,14 @@ public class RandomWalkSnakeFilter_ extends QWindowBuilder
     mask = mask.convertToRGB();
 
     // convert mask to seeds
-    Map<Seeds, ImageProcessor> seeds =
-            RandomWalkSegmentation.decodeSeeds(mask, Color.WHITE, Color.BLACK);
+    Seeds seeds = SeedProcessor.decodeSeedsfromRgb(mask, Arrays.asList(Color.WHITE), Color.BLACK);
     // use contour propagator for shrinking
     PropagateSeeds propagateSeeds = PropagateSeeds.getPropagator(Propagators.CONTOUR, true, null);
     // get new seeds using FG seed processed by propagator (shrink->new FG and expand->new BG)
-    seeds = propagateSeeds.propagateSeed(seeds.get(Seeds.FOREGROUND), ip, params.shrinkPower,
-            params.expandPower);
+    seeds = propagateSeeds.propagateSeed(seeds.get(SeedTypes.FOREGROUNDS, 1), ip,
+            params.shrinkPower, params.expandPower);
     // mask to local mean
-    seeds.put(Seeds.ROUGHMASK, mask.convertToByte(false));
+    seeds.put(SeedTypes.ROUGHMASK, mask.convertToByte(false));
 
     // new ImagePlus("", mask).show();
     // new ImagePlus("FG", seeds.get(Seeds.FOREGROUND)).show();

@@ -192,6 +192,9 @@ public class RandomWalkSnakeFilter_ extends QWindowBuilder
     Seeds seeds = SeedProcessor.decodeSeedsfromRgb(mask, Arrays.asList(Color.WHITE), Color.BLACK);
     // use contour propagator for shrinking
     PropagateSeeds propagateSeeds = PropagateSeeds.getPropagator(Propagators.CONTOUR, true, null);
+    // linear shrink
+    ((PropagateSeeds.Contour) propagateSeeds).scaleMagn = 1.0;
+    ((PropagateSeeds.Contour) propagateSeeds).averageNormalsDist = 0;
     // get new seeds using FG seed processed by propagator (shrink->new FG and expand->new BG)
     seeds = propagateSeeds.propagateSeed(seeds.get(SeedTypes.FOREGROUNDS, 1), ip,
             params.shrinkPower, params.expandPower);

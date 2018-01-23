@@ -3,7 +3,7 @@
   <parent>
     <groupId>com.github.celldynamics</groupId>
     <artifactId>pom-quimp-plugin</artifactId>
-    <version>17.12.03-SNAPSHOT</version>
+    <version>18.01.01</version>
     <relativePath />
     <!-- http://stackoverflow.com/questions/6003831/parent-relativepath-points-at-my-com-mycompanymyproject-instead-of-org-apache -->
   </parent>
